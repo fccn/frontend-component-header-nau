@@ -1,8 +1,12 @@
 import React from 'react';
 import {
-  authenticatedUser, initializeMockApp, render, screen,
+  authenticatedUser, initializeMockApp, render, screen, waitFor,
 } from '../setupTest';
 import { LearningHeader as Header } from '../index';
+
+jest.mock('./data/api', () => ({
+  getCourseLogoOrg: jest.fn().mockResolvedValue(Promise.resolve('logo-url')),
+}));
 
 describe('Header', () => {
   beforeAll(async () => {
@@ -18,12 +22,16 @@ describe('Header', () => {
   it('displays course data', () => {
     const courseData = {
       courseOrg: 'course-org',
-      courseNumber: 'course-number',
       courseTitle: 'course-title',
     };
     render(<Header {...courseData} />);
-
-    expect(screen.getByText(`${courseData.courseOrg} ${courseData.courseNumber}`)).toBeInTheDocument();
-    expect(screen.getByText(courseData.courseTitle)).toBeInTheDocument();
+    waitFor(
+      () => {
+        // eslint-disable-next-line no-undef
+        expect(screen.getByAltText(`${courseData.courseOrg} logo`)).toHaveAttribute('src', 'logo-url');
+        expect(screen.getByText(`${courseData.courseOrg}`)).toBeInTheDocument();
+        expect(screen.getByText(courseData.courseTitle)).toBeInTheDocument();
+      },
+    );
   });
 });
