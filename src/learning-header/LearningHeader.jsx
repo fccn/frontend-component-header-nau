@@ -36,7 +36,7 @@ function LearningHeader({
 
   useEffect(() => {
     if (courseOrg) {
-      getCourseLogoOrg(courseOrg).then((logoOrgUrl) => { setLogoOrg(logoOrgUrl); });
+      getCourseLogoOrg().then((logoOrgUrl) => { setLogoOrg(logoOrgUrl); });
     }
   }, []);
 

@@ -27,7 +27,7 @@ describe('Header', () => {
     render(<Header {...courseData} />);
     waitFor(
       () => {
-        // eslint-disable-next-line no-undef
+
         expect(screen.getByAltText(`${courseData.courseOrg} logo`)).toHaveAttribute('src', 'logo-url');
         expect(screen.getByText(`${courseData.courseOrg}`)).toBeInTheDocument();
         expect(screen.getByText(courseData.courseTitle)).toBeInTheDocument();
