@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
@@ -7,6 +7,7 @@ import { AppContext } from '@edx/frontend-platform/react';
 import AnonymousUserMenu from './AnonymousUserMenu';
 import AuthenticatedUserDropdown from './AuthenticatedUserDropdown';
 import messages from './messages';
+import getCourseLogoOrg from './data/api';
 
 const LinkedLogo = ({
   href,
@@ -26,9 +27,16 @@ LinkedLogo.propTypes = {
 };
 
 const LearningHeader = ({
-  courseOrg, courseNumber, courseTitle, intl, showUserDropdown,
+  courseOrg, courseTitle, intl, showUserDropdown,
 }) => {
   const { authenticatedUser } = useContext(AppContext);
+  const [logoOrg, setLogoOrg] = useState(null);
+
+  useEffect(() => {
+    if (courseOrg) {
+      getCourseLogoOrg().then((logoOrgUrl) => { setLogoOrg(logoOrgUrl); });
+    }
+  }, []);
 
   const headerLogo = (
     <LinkedLogo
@@ -44,17 +52,25 @@ const LearningHeader = ({
       <a className="sr-only sr-only-focusable" href="#main-content">{intl.formatMessage(messages.skipNavLink)}</a>
       <div className="container-xl py-2 d-flex align-items-center">
         {headerLogo}
-        <div className="flex-grow-1 course-title-lockup" style={{ lineHeight: 1 }}>
-          <span className="d-block small m-0">{courseOrg} {courseNumber}</span>
-          <span className="d-block m-0 font-weight-bold course-title">{courseTitle}</span>
+        <div className="flex-grow-1 course-title-lockup text-center" style={{ lineHeight: 1 }}>
+          {
+            (courseOrg && logoOrg)
+            && <img src={logoOrg} alt={`${courseOrg} logo`} style={{ maxHeight: '50px' }} />
+          }
+          <span
+            className="d-inline-block course-title font-weight-bold ml-3 overflow-hidden text-nowrap text-left w-25"
+            style={{ textOverflow: 'ellipsis' }}
+          >
+            {courseTitle}
+          </span>
         </div>
         {showUserDropdown && authenticatedUser && (
-        <AuthenticatedUserDropdown
-          username={authenticatedUser.username}
-        />
+          <AuthenticatedUserDropdown
+            username={authenticatedUser.username}
+          />
         )}
         {showUserDropdown && !authenticatedUser && (
-        <AnonymousUserMenu />
+          <AnonymousUserMenu />
         )}
       </div>
     </header>
@@ -63,7 +79,6 @@ const LearningHeader = ({
 
 LearningHeader.propTypes = {
   courseOrg: PropTypes.string,
-  courseNumber: PropTypes.string,
   courseTitle: PropTypes.string,
   intl: intlShape.isRequired,
   showUserDropdown: PropTypes.bool,
@@ -71,7 +86,6 @@ LearningHeader.propTypes = {
 
 LearningHeader.defaultProps = {
   courseOrg: null,
-  courseNumber: null,
   courseTitle: null,
   showUserDropdown: true,
 };
