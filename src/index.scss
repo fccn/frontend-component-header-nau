@@ -43,9 +43,9 @@ $white: #fff;
   .user-dropdown {
     .btn {
       height: 3rem;
-      // @media (max-width: -1 + map-get($grid-breakpoints, "sm")) {
-      //   padding: 0 0.5rem;
-      // }
+      @media (map-get($grid-breakpoints, "sm")) {
+        padding: 0 0.5rem;
+      }
     }
   }
 }
