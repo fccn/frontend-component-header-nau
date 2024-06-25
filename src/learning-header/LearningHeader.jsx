@@ -29,7 +29,6 @@ LinkedLogo.propTypes = {
 // this feature flag is not included on the frontend-platform, we have to get it directly from ENV
 const enabledOrgLogo = process.env.ENABLED_ORG_LOGO || false;
 
-
 const LearningHeader = ({
   courseOrg, courseTitle, intl, showUserDropdown,
 }) => {
@@ -40,7 +39,7 @@ const LearningHeader = ({
     if (courseOrg) {
       getCourseLogoOrg().then((logoOrgUrl) => { setLogoOrg(logoOrgUrl); });
     }
-  }, []);
+  });
 
   const headerLogo = (
     <LinkedLogo
