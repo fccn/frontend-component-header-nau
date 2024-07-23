@@ -29,6 +29,8 @@ Environment Variables
 * ``AUTHN_MINIMAL_HEADER`` - A boolean flag which hides the main menu, user menu, and logged-out
   menu items when truthy.  This is intended to be used in micro-frontends like
   frontend-app-authentication in which these menus are considered distractions from the user's task.
+* ``ENABLE_ORG_LOGO`` - A boolean flag to enable the display of the org logo on the center of the 
+  header nav bar. Defaults to **false**
 
 ************
 Installation
@@ -36,7 +38,7 @@ Installation
 
 To install this header into your Open edX micro-frontend, run the following command in your MFE:
 
-``npm i --save @edx/frontend-component-header``
+``npm i --save @nauedu/frontend-component-header``
 
 This will make the component available to be imported into your application.
 
@@ -72,6 +74,30 @@ Start the development server::
 Build a production distribution::
 
   npm run build
+
+***********
+Publishing to npmjs.com
+***********
+
+Any changes to this library have to be pushed to npmjs.com to be reflected on the build.
+
+Publish to npm::
+
+  npm publish
+
+
+***********
+Deploy in production
+***********
+To replace the default edx header with the new one, use one of the following instructions:
+
+Add the necessary settings to the mfe_brand plugin::
+
+  RUN npm install '@edx/frontend-component-header@npm:@nauedu/frontend-component-header'
+
+Alternatively, you can specify the version::
+
+  RUN npm install '@edx/frontend-component-header@npm:@nauedu/frontend-component-header@1.0.0'
 
 .. |Build Status| image:: https://api.travis-ci.com/edx/frontend-component-header.svg?branch=master
    :target: https://travis-ci.com/edx/frontend-component-header
