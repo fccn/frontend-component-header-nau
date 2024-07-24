@@ -2,7 +2,7 @@ name: Release CI
 on:
   push:
     branches:
-      - master
+      - nau/*.master
 jobs:
   release:
     name: Release
