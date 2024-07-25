@@ -1,5 +1,8 @@
 {
-  "branch": "nau/*.master",
+  "branches": [
+    { name: "master" },
+    { name: "nau/nutmeg.master", range: "14.x", channel: "14.x" }
+  ],
   "tagFormat": "v${version}",
   "verifyConditions": [
     "@semantic-release/npm",
