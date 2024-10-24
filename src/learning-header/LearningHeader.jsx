@@ -30,7 +30,7 @@ const LearningHeader = ({
 }) => {
   const { authenticatedUser } = useContext(AppContext);
   const [logoOrg, setLogoOrg] = useState(null);
-  const enableOrgLogo = getConfig().ENABLE_ORG_LOGO || false;
+  const enableOrgLogo = getConfig().HEADER_ENABLE_ORG_LOGO || process.env.HEADER_ENABLE_ORG_LOGO;
 
   useEffect(() => {
     if (courseOrg) {
