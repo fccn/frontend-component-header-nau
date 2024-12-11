@@ -52,11 +52,11 @@ const LearningHeader = ({
       </Responsive>
       <Responsive minWidth={769}>
         <LinkedLogo
-            className="logo"
-            href={`${getConfig().LMS_BASE_URL}/dashboard`}
-            src={getConfig().LOGO_URL}
-            alt={getConfig().SITE_NAME}
-          />
+          className="logo"
+          href={`${getConfig().LMS_BASE_URL}/dashboard`}
+          src={getConfig().LOGO_URL}
+          alt={getConfig().SITE_NAME}
+        />
       </Responsive>
     </>
   );
@@ -85,7 +85,7 @@ const LearningHeader = ({
             <Responsive maxWidth={1000}>
               <LanguageSelector
                 options={JSON.parse(getConfig().SITE_SUPPORTED_LANGUAGES)}
-                compact={true}
+                compact
                 authenticatedUser={authenticatedUser}
               />
             </Responsive>
