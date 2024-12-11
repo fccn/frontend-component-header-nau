@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { getConfig } from '@edx/frontend-platform';
+import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
 
 // Local Components
 import { Menu, MenuTrigger, MenuContent } from './Menu';
@@ -13,6 +14,7 @@ import messages from './Header.messages';
 
 // Assets
 import { CaretIcon } from './Icons';
+import LanguageSelector from './LanguageSelector';
 
 class DesktopHeader extends React.Component {
   constructor(props) { // eslint-disable-line no-useless-constructor
@@ -145,13 +147,21 @@ class DesktopHeader extends React.Component {
             {logoDestination === null ? <Logo className="logo" src={logo} alt={logoAltText} /> : <LinkedLogo className="logo" {...logoProps} />}
             <nav
               aria-label={intl.formatMessage(messages['header.label.main.nav'])}
-              className="nav main-nav"
+              className="nav main-nav mr-auto"
             >
               {this.renderMainMenu()}
             </nav>
+            {getConfig().ENABLE_HEADER_LANG_SELECTOR && (
+              <div className="mx-2">
+                <LanguageSelector
+                  options={getConfig().SITE_SUPPORTED_LENGUAGES}
+                  authenticatedUser={getAuthenticatedUser()}
+                />
+              </div>
+            )}
             <nav
               aria-label={intl.formatMessage(messages['header.label.secondary.nav'])}
-              className="nav secondary-menu-container align-items-center ml-auto"
+              className="nav secondary-menu-container align-items-center"
             >
               {loggedIn
                 ? (
