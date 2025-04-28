@@ -34,6 +34,7 @@ const RootWrapper = ({
       SITE_NAME: process.env.SITE_NAME,
       STUDIO_BASE_URL: process.env.STUDIO_BASE_URL,
       LOGIN_URL: process.env.LOGIN_URL,
+      GAMMA_SETTINGS_URL: process.env.GAMMA_SETTINGS_URL,
     },
   }), []);
   const responsiveContextValue = useMemo(() => ({ width: screenWidth }), []);
@@ -70,6 +71,7 @@ const props = {
   ],
   outlineLink: 'tEsTLInK',
   searchButtonAction: null,
+  gammaSettingsUrl: null,
 };
 
 describe('Header', () => {
@@ -119,6 +121,27 @@ describe('Header', () => {
       const maintenanceButton = queryByText(messages['header.user.menu.maintenance'].defaultMessage);
 
       expect(maintenanceButton).toBeNull();
+    });
+
+    it('gamification settings link should be in user menu', async () => {
+      currentUser = { ...authenticatedUser };
+      const { getAllByRole, queryByText } = render(<RootWrapper {...props} />);
+      const userMenu = getAllByRole('button')[1];
+      await waitFor(() => fireEvent.click(userMenu));
+      const gamificationSettingsButton = queryByText(messages['header.user.menu.gamification-settings'].defaultMessage);
+
+      expect(gamificationSettingsButton).toBeVisible();
+      expect(gamificationSettingsButton.href).toBe(process.env.GAMMA_SETTINGS_URL);
+    });
+
+    it('gamification settings link should not be in user menu', async () => {
+      currentUser = { ...authenticatedUser, administrator: false };
+      const { getAllByRole, queryByText } = render(<RootWrapper {...props} />);
+      const userMenu = getAllByRole('button')[1];
+      await waitFor(() => fireEvent.click(userMenu));
+      const gamificationSettingsButton = queryByText(messages['header.user.menu.gamification-settings'].defaultMessage);
+
+      expect(gamificationSettingsButton).toBeNull();
     });
 
     it('user menu should use avatar icon', async () => {

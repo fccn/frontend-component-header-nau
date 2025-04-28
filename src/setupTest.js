@@ -38,6 +38,7 @@ process.env.LOGO_URL = 'https://edx-cdn.org/v3/default/logo.svg';
 process.env.LOGO_TRADEMARK_URL = 'https://edx-cdn.org/v3/default/logo-trademark.svg';
 process.env.LOGO_WHITE_URL = 'https://edx-cdn.org/v3/default/logo-white.svg';
 process.env.FAVICON_URL = 'https://edx-cdn.org/v3/default/favicon.ico';
+process.env.GAMMA_SETTINGS_URL = 'http://0.0.0.0:9700/gamma/badges';
 
 class MockLoggingService {
   logInfo = jest.fn();
@@ -66,6 +67,7 @@ export function initializeMockApp() {
     CSRF_TOKEN_API_PATH: process.env.CSRF_TOKEN_API_PATH || null,
     LOGO_URL: process.env.LOGO_URL || null,
     SITE_NAME: process.env.SITE_NAME || null,
+    GAMMA_SETTINGS_URL: process.env.GAMMA_SETTINGS_URL || null,
 
     authenticatedUser: {
       userId: 'abc123',
