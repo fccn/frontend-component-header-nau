@@ -72,7 +72,7 @@ const HeaderBody = ({
               </Button>
             ) : (
               <div className="w-25">
-                <Row className="m-0 flex-nowrap">
+                <Row className="m-0 flex-nowrap align-items-center">
                   {renderBrandNav}
                   <CourseLockUp
                     {...{
