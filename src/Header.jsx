@@ -16,6 +16,8 @@ import MobileHeader from './MobileHeader';
 
 import messages from './Header.messages';
 
+const showGamification = process.env.ENABLE_RG_GAMIFICATION ? process.env.ENABLE_RG_GAMIFICATION.toLowerCase() === 'true' : null;
+
 ensureConfig([
   'LMS_BASE_URL',
   'LOGOUT_URL',
@@ -59,6 +61,20 @@ const Header = ({
       content: intl.formatMessage(messages['header.links.courses']),
     },
   ];
+
+  const gamificationItems = [
+    {
+      type: 'item',
+      href: `${config.LMS_BASE_URL}/gamma_dashboard/dashboard`,
+      content: intl.formatMessage(messages['header.menu.performance.label']),
+    },
+    {
+      type: 'item',
+      href: `${config.LMS_BASE_URL}/gamma_dashboard/leaderboard`,
+      content: intl.formatMessage(messages['header.menu.leaderboard.label']),
+    },
+  ];
+
   const defaultUserMenu = authenticatedUser === null ? [] : [{
     heading: '',
     items: [
@@ -67,6 +83,8 @@ const Header = ({
         href: `${config.LMS_BASE_URL}/dashboard`,
         content: intl.formatMessage(messages['header.user.menu.dashboard']),
       },
+      // Add gamification items here if enabled
+      ...(showGamification ? gamificationItems : []),
       {
         type: 'item',
         href: `${config.ACCOUNT_PROFILE_URL}/u/${authenticatedUser.username}`,
