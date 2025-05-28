@@ -11,6 +11,11 @@ const messages = defineMessages({
     defaultMessage: 'Maintenance',
     description: 'Link to the Studio maintenance page',
   },
+  'header.user.menu.gamification-settings': {
+    id: 'header.user.menu.gamification-settings',
+    defaultMessage: 'Gamification Settings',
+    description: 'Link to the Studio gamification settings page',
+  },
   'header.user.menu.logout': {
     id: 'header.user.menu.logout',
     defaultMessage: 'Logout',

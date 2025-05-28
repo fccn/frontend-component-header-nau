@@ -37,6 +37,7 @@ const HeaderBody = ({
   mainMenuDropdowns,
   outlineLink,
   searchButtonAction,
+  gammaSettingsUrl,
 }) => {
   const intl = useIntl();
 
@@ -121,6 +122,7 @@ const HeaderBody = ({
               logoutUrl,
               authenticatedUserAvatar,
               isAdmin,
+              gammaSettingsUrl,
             }}
           />
         </Nav>
@@ -155,6 +157,7 @@ HeaderBody.propTypes = {
   })),
   outlineLink: PropTypes.string,
   searchButtonAction: PropTypes.func,
+  gammaSettingsUrl: PropTypes.string,
 };
 
 HeaderBody.defaultProps = {
@@ -174,6 +177,7 @@ HeaderBody.defaultProps = {
   mainMenuDropdowns: [],
   outlineLink: null,
   searchButtonAction: null,
+  gammaSettingsUrl: null,
 };
 
 export default HeaderBody;

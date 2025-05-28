@@ -14,6 +14,7 @@ const UserMenu = ({
   authenticatedUserAvatar,
   isMobile,
   isAdmin,
+  gammaSettingsUrl,
   // injected
   intl,
 }) => {
@@ -43,6 +44,7 @@ const UserMenu = ({
         logoutUrl,
         intl,
         isAdmin,
+        gammaSettingsUrl,
       })}
     />
   );
@@ -55,6 +57,7 @@ UserMenu.propTypes = {
   authenticatedUserAvatar: PropTypes.string,
   isMobile: PropTypes.bool,
   isAdmin: PropTypes.bool,
+  gammaSettingsUrl: PropTypes.string,
   // injected
   intl: intlShape.isRequired,
 };
@@ -64,6 +67,7 @@ UserMenu.defaultProps = {
   isAdmin: false,
   authenticatedUserAvatar: null,
   username: null,
+  gammaSettingsUrl: null,
 };
 
 export default injectIntl(UserMenu);

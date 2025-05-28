@@ -5,6 +5,7 @@ const getUserMenuItems = ({
   logoutUrl,
   intl,
   isAdmin,
+  gammaSettingsUrl,
 }) => {
   let items = [
     {
@@ -23,11 +24,20 @@ const getUserMenuItems = ({
       }, {
         href: `${studioBaseUrl}/maintenance`,
         title: intl.formatMessage(messages['header.user.menu.maintenance']),
-      }, {
-        href: `${logoutUrl}`,
-        title: intl.formatMessage(messages['header.user.menu.logout']),
       },
     ];
+
+    if (gammaSettingsUrl) {
+      items.push({
+        href: `${gammaSettingsUrl}`,
+        title: intl.formatMessage(messages['header.user.menu.gamification-settings']),
+      });
+    }
+
+    items.push({
+      href: `${logoutUrl}`,
+      title: intl.formatMessage(messages['header.user.menu.logout']),
+    });
   }
 
   return items;

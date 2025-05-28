@@ -34,6 +34,7 @@ const StudioHeader = ({
     mainMenuDropdowns,
     outlineLink,
     searchButtonAction,
+    gammaSettingsUrl: config.GAMMA_SETTINGS_URL,
   };
 
   return (
