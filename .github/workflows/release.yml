@@ -39,6 +39,6 @@ jobs:
     - name: Build
       run: npm run build
     - name: Release to npmjs
-      uses: JS-DevTools/npm-publish@v3
+      uses: JS-DevTools/npm-publish@v4
       with:
         token: ${{ secrets.NPM_AUTH_TOKEN }}
