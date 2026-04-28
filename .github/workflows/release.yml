@@ -2,8 +2,14 @@ name: Release CI
 on:
   push:
     branches:
-    - nau/*.master
-
+      - ManuelStarDo/issues/863/fix-release-ci
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (skip actual npm publish)'
+        required: false
+        default: 'true'
+        type: boolean
 jobs:
   release:
     name: Release
@@ -39,6 +45,7 @@ jobs:
     - name: Build
       run: npm run build
     - name: Release to npmjs
-      uses: JS-DevTools/npm-publish@v3
+      uses: JS-DevTools/npm-publish@v4
       with:
         token: ${{ secrets.NPM_AUTH_TOKEN }}
+        dry-run: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
