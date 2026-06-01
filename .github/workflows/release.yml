@@ -43,4 +43,4 @@ jobs:
     - name: Build
       run: npm run build
     - name: Release to npmjs
-      uses: JS-DevTools/npm-publish@v4
+      run: npm publish
