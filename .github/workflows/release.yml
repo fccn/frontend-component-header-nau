@@ -42,5 +42,7 @@ jobs:
         fail_ci_if_error: false
     - name: Build
       run: npm run build
+    - name: Debug - Check npm config
+      run: npm config list --userconfig
     - name: Release to npmjs
       run: npm publish
