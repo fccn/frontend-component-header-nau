@@ -4,14 +4,14 @@ on:
     branches:
     - nau/*.master
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    environment: release
-    permissions:
-      contents: read
-      id-token: write
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -43,4 +43,4 @@ jobs:
     - name: Build
       run: npm run build
     - name: Release to npmjs
-      run: npm publish
+      run: npx --yes npm@11 publish
