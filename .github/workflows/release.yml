@@ -42,5 +42,7 @@ jobs:
         fail_ci_if_error: false
     - name: Build
       run: npm run build
+    - name: Install npm@11
+      run: npm install -g npm@11
     - name: Release to npmjs
-      run: npx --yes npm@11 publish
+      run: npm publish
