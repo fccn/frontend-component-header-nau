@@ -1,3 +1,8 @@
+// Breakpoints below are static px values on purpose. This package supports
+// Paragon ">= 22.0.0 < 24.0.0", and the two majors expose breakpoints
+// differently: 22 only has the Bootstrap SCSS variables, 23 moved to design
+// tokens / @custom-media. Hard-coding keeps this stylesheet self-contained and
+// working across the whole peer range. Values match Paragon's sm/md breakpoints.
 $spacer: 1rem;
 $blue: #007db8;
 $white: #fff;
@@ -47,7 +52,8 @@ $rounded-pill: 50rem  !default;
   .user-dropdown {
     .btn {
       height: 3rem;
-      @media (map-get($grid-breakpoints, "sm")) {
+      // Below "sm".
+      @media (max-width: 576px) {
         padding: 0 0.5rem;
       }
     }
